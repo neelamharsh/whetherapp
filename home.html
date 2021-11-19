@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/704b39ba98.js" crossorigin="anonymous"></script>
+
+    <style>
+        
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+body
+{
+    background-color: whitesmoke;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.outer 
+{
+    margin: 12vh auto;
+    width: 50%;
+    max-width: 350PX;
+    border-radius: 50px 50px 10px 10px;
+    text-align: center;
+    box-shadow: rgb(211, 211, 211) 5px 5px 10px 2px;
+    background-color: rgb(100, 195, 219);
+  }
+
+  .inner1
+  {
+      border-radius:40px 40px 100px 200px;
+      height: 250px;
+      padding-top: 50%;
+      font-size: 50px;
+      background-color:#1e6ee5 !important;
+  }
+
+  .inner1 i
+  {
+    animation: animation1 3s infinite alternate;
+  }
+
+  @keyframes animation1 {
+    from {font-size: 100px;}
+    to {font-size: 150px;}
+  }
+
+  h5
+  {
+      color:rgb(29, 56, 52);
+      margin: 5px;
+  }
+
+  .inner2
+  {
+      color: rgb(75, 25, 17);
+      padding-top: 20px;
+  }
+
+  .inner3
+  {
+    color:rgb(29, 56, 52);
+    padding-top: 5px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .inner2 i
+  {
+    animation: animation2 3s linear infinite alternate;
+  }
+
+  @keyframes animation2 {
+    from {transform: translate(-0.5rem);}
+    to {transform: translate(0.5rem);}
+  }
+
+  .inner4
+  {
+      color: rgb(75, 25, 17);
+      margin-top: 20px;
+  }
+
+  .inner5
+  {
+      padding-bottom:20px;
+  }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="outer">
+        
+        <div class="inner1" id="whethercon">
+            <i class="fas fa-sun"></i>
+        </div>
+
+        <div class="inner2"><h2>
+            <i class="fas fa-street-view"></i>
+             &nbsp {%location%},{%country%} </h2></div>
+        <div class="inner3" id="date"><h5>Mon | OCT 23 | 10:49AM</h5></div>
+        <div class="inner4"><h2>&nbsp &nbsp {%temprature%}℃</h2></div>
+        <div class="inner5"><h5>&nbsp &nbsp Min {%temprature_min%}℃ | Max {%temprature_max%}℃</h5></div>
+    </div>
+
+
+    <script>
+
+        const currDate = document.getElementById("date");
+        const weathercon = document.getElementById("whethercon");
+
+        const tempStatus = "{%tempStat%}";
+
+        if(tempStatus == "Sunny")
+        weathercon.innerHTML =  "<i class='fas fa-sun style='color:#FB8C00'></i>";
+        else if(tempStatus == "Clouds")
+        weathercon.innerHTML =  "<i class='fas fa-cloud' style='color:#212F3C'></i>";
+        else if(tempStatus == "Rainy")
+        weathercon.innerHTML =  "<i class='fas fa-cloud-rain' style='color:#212F3C'></i>";
+        else 
+        weathercon.innerHTML =  "<i class='fas fa-cloud' style='color:#212F3C'></i>";
+
+        const getCurrentDay = () => 
+        {
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            let currentTime = new Date();
+            let day = weekday[currentTime.getDay()];
+            return day;
+        };
+
+        const getCurrentTime = () => 
+        {
+
+            var months = new Array(12);
+            months[1] = "Jan";
+            months[2] = "Feb";
+            months[3] = "Mar";
+            months[4] = "Apr";
+            months[5] = "May";
+            months[6] = "Jun";
+            months[7] = "Jul";
+            months[8] = "Aug";
+            months[9] = "Sep";
+            months[10] = "Oct";
+            months[11] = "Nov";
+            months[12] = "Dec";
+
+            var now = new Date();
+            var month = now.getMonth() + 1;
+            var date = now.getDate();
+
+            let hours = now.getHours();
+            let mins = now.getMinutes();
+
+            if(mins<10) 
+            {
+                mins = "0" + mins;
+            }
+
+            return `${months[month]}-${date} | ${hours}:${mins}`;
+        }
+
+        currDate.innerHTML = getCurrentDay() + " | " + getCurrentTime();
+        
+    </script>
+
+
+    
+
+</body>
+</html>
